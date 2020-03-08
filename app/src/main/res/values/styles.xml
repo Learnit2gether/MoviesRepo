@@ -1,19 +1,30 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="Base.Theme.MovieTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="cardViewStyle">@style/CardViewStyle</item>
-<item name="android:windowBackground">@android:color/darker_gray</item>
+        <item name="android:windowBackground">@android:color/background_dark</item>
     </style>
 
+    <style name="Theme.MovieTheme" parent="Base.Theme.MovieTheme"/>
+
+    <style name="Theme.MovieTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
+
+    <style name="Theme.MovieTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="TextAppearance.MovieTheme.Toolbar.Text" parent="TextAppearance.MaterialComponents.Headline5" >
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
 
     <style name="CardViewStyle" parent="CardView.Dark">
         <item name="cardCornerRadius">10dp</item>
-
     </style>
 
 

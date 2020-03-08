@@ -2,43 +2,44 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
         <variable
             name="resultItem"
             type="com.example.sample.apps.movies.model.data.ResultsItem" />
     </data>
 
-<androidx.cardview.widget.CardView
-    android:id="@+id/layout_card"
-    android:layout_width="130dp"
-    android:layout_height="200dp"
-    android:layout_alignParentStart="true"
-    android:layout_alignParentTop="true"
-    >
+    <androidx.cardview.widget.CardView
+        android:id="@+id/layout_card"
+        android:layout_width="130dp"
+        android:layout_height="200dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="1dp">
-
-        <ImageView
-            android:layout_margin="1dp"
-            android:scaleType="fitXY"
-            android:src="@{resultItem.posterPath}"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:padding="1dp">
 
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
-            android:src="@drawable/favourite_enabled" />
-    </RelativeLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:scaleType="fitXY"
+                android:src="@{resultItem.posterPath}" />
+
+            <ImageView
+                android:id="@+id/iv_favourite"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/favourite_enabled" />
+        </RelativeLayout>
 
 
-</androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 
 </layout>

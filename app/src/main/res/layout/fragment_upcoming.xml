@@ -12,12 +12,14 @@
         android:id="@+id/grid_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:columnWidth="130dp"
+        android:columnWidth="110dp"
         android:gravity="center"
         android:horizontalSpacing="10dp"
         android:numColumns="auto_fit"
-        android:stretchMode="spacingWidth"
+        android:stretchMode="columnWidth"
         android:verticalSpacing="10dp"
+        android:clipToPadding="false"
+        android:paddingBottom="100dp"
         tools:listitem="@layout/grid_movie_item" />
 
 </FrameLayout>

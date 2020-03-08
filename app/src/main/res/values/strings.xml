@@ -8,4 +8,7 @@
     <string name="error_network_connection">Error connecting internet</string>
     <string name="error_unknown">Oops! something went wrong</string>
 
+    <string name="upcoming_movies">Upcoming</string>
+    <string name="favourite_movies">Favourite</string>
+
 </resources>

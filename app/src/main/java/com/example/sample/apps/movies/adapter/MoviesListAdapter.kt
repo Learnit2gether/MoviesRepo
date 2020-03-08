@@ -13,7 +13,6 @@ class MoviesListAdapter:  BaseAdapter(){
     private var list = ArrayList<ResultsItem?>()
 
     fun setList(list: List<ResultsItem?>){
-        this.list.clear()
         this.list.addAll(list)
         notifyDataSetChanged()
     }
