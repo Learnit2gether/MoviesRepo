@@ -28,10 +28,6 @@ class UpcomingFragment : Fragment() {
 
     private lateinit var adapter: MoviesListAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -73,7 +69,7 @@ class UpcomingFragment : Fragment() {
 
     private fun subscribeUi(adapter: MoviesListAdapter) {
         viewModel.movieListLiveData().observe(viewLifecycleOwner,
-            Observer<List<ResultsItem?>> { t -> adapter.setList(t!!) })
+            Observer<List<ResultsItem?>> { t -> adapter.setList(t!!,false) })
 
         viewModel.showErrorLiveData().observe(viewLifecycleOwner,
             Observer<String> { t -> errorDialog(activity as Context, t!!) })

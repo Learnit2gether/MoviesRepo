@@ -1,10 +1,16 @@
 package com.example.sample.apps.movies.model.repository
 
 import android.content.Context
+import androidx.arch.core.util.Function
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import com.example.sample.apps.movies.BuildConfig
 import com.example.sample.apps.movies.R
 import com.example.sample.apps.movies.model.data.ResponseError
 import com.example.sample.apps.movies.model.data.ResponseUpcomingMovies
+import com.example.sample.apps.movies.model.data.ResultsItem
+import com.example.sample.apps.movies.model.repository.db.AppDatabase
+import com.example.sample.apps.movies.model.repository.db.MoviesTable
 import com.example.sample.apps.movies.model.repository.network.NetworkClient
 import com.example.sample.apps.movies.utils.isConnected
 import com.google.gson.GsonBuilder
@@ -16,7 +22,13 @@ import java.io.IOException
 
 class UpcomingMovieRepository(val context: Context) {
 
-    fun loadUpcomingMovies(page: Int,listener: Listener) {
+    private var movies: LiveData<List<MoviesTable>>
+    init {
+        val dao = AppDatabase.getInstance(context).getMoviesDao()
+        movies = dao.loadMovies()
+    }
+
+    fun loadUpcomingMovies(page: Int, listener: Listener) {
         if (isConnected(context = context)) {
 
             val response = NetworkClient.iDef.loadUpcomingMovies(BuildConfig.APIKEY, page)
@@ -65,6 +77,31 @@ class UpcomingMovieRepository(val context: Context) {
         }
 
     }
+
+    fun loadFavourites(): LiveData<List<ResultsItem>> =
+        Transformations.map(movies, ::someFunc)
+
+    private fun someFunc(dblist: List<MoviesTable>): List<ResultsItem> {
+        val listResults = mutableListOf<ResultsItem>()
+
+        dblist.forEach {  i ->
+            run {
+                var item = ResultsItem (
+                    isFavourite = true,
+                    posterPath = i.posterPath,
+                    backdropPath = i.backdropPath,
+                    releaseDate = i.releaseDate,
+                    title = i.title,
+                    id = i.movieId.toInt(),
+                    overview = i.overview,
+                    isTransformed = true
+                )
+                listResults.add(item)
+            }
+        }
+        return listResults
+    }
+
 
 
     interface Listener {

@@ -42,6 +42,6 @@ class LoadMoviesViewModel internal constructor(val repository: UpcomingMovieRepo
 
     fun movieListLiveData(): LiveData<List<ResultsItem?>> = movieList
     fun showErrorLiveData(): LiveData<String> = showError
-
+    fun loadFavourites(): LiveData<List<ResultsItem>> = repository.loadFavourites()
 
 }

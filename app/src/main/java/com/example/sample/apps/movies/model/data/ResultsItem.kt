@@ -44,5 +44,10 @@ data class ResultsItem(
 	val adult: Boolean? = null,
 
 	@field:SerializedName("vote_count")
-	val voteCount: Int? = null
+	val voteCount: Int? = null,
+
+	var isFavourite: Boolean = false,
+
+	var isTransformed: Boolean = false
+
 )
