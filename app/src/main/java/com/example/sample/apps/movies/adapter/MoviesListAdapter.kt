@@ -6,6 +6,9 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.CompoundButton
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
+import com.example.sample.apps.movies.MoviesPagerFragment
+import com.example.sample.apps.movies.MoviesPagerFragmentDirections
 import com.example.sample.apps.movies.R
 import com.example.sample.apps.movies.model.data.ResultsItem
 import com.example.sample.apps.movies.databinding.GridMovieItemBinding
@@ -67,6 +70,14 @@ class MoviesListAdapter : BaseAdapter() {
 
         fun bind(item: ResultsItem?, position: Int) {
             binding.resultItem = item
+            binding.layoutCard.setOnClickListener {
+                val direction =
+                    MoviesPagerFragmentDirections.action_moviesPagerFragment_to_movieDetailFragment()
+
+                it.findNavController().navigate(direction)
+
+            }
+
             binding.cbFavourite.setOnCheckedChangeListener { buttonView, isChecked ->
                 run {
                     item?.isFavourite = isChecked
