@@ -70,13 +70,13 @@ class MoviesListAdapter : BaseAdapter() {
 
         fun bind(item: ResultsItem?, position: Int) {
             binding.resultItem = item
+
             binding.layoutCard.setOnClickListener {
                 val direction =
                     MoviesPagerFragmentDirections.action_moviesPagerFragment_to_movieDetailFragment()
-
                 it.findNavController().navigate(direction)
-
             }
+
 
             binding.cbFavourite.setOnCheckedChangeListener { buttonView, isChecked ->
                 run {
