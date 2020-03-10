@@ -17,18 +17,22 @@ class LoadMoviesViewModel internal constructor(val repository: UpcomingMovieRepo
     private var showError = MutableLiveData<String>()
     private var totalPages: Int? = 1
     private var count = 0
-    private var loadingFinish = MutableLiveData<Boolean>()
+    private var isLoading = false
 
 
     fun fetchMovies(){
+        if(isLoading){
+            return
+        }
         if(totalPages?:1 > count){
             count++
         }else{
             return
         }
-
+        isLoading = true
         repository.loadUpcomingMovies(count,object: UpcomingMovieRepository.Listener{
             override fun loadUpcomingMoviesSuccess(response: ResponseUpcomingMovies) {
+                isLoading = false
                 totalPages = response.totalPages
                 movieLazyList.addAll(response.results!!)
                 Log.d(TAG, "loadUpcomingMoviesSuccess: ${totalPages}")
@@ -36,6 +40,7 @@ class LoadMoviesViewModel internal constructor(val repository: UpcomingMovieRepo
             }
 
             override fun loadUpcomingMoviesFailed(error: String) {
+                isLoading = false
                 showError.value = error
             }
         })
