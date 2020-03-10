@@ -1,7 +1,10 @@
 package com.example.sample.apps.movies.model.data
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class ResultsItem(
 
 	@field:SerializedName("overview")
@@ -48,6 +51,8 @@ data class ResultsItem(
 
 	var isFavourite: Boolean = false,
 
-	var isTransformed: Boolean = false
+	var isTransformed: Boolean = false,
 
-)
+	var isSavedInDb: Boolean = false
+
+) : Parcelable

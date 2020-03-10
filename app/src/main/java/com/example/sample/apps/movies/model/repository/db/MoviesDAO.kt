@@ -12,7 +12,9 @@ interface MoviesDAO {
     @Query("DELETE FROM movies WHERE movieId = :id or title= :name")
     fun deleteMovie(id: String?,name: String?): Int
 
-    @Transaction
+    @Query("SELECT COUNT(title) from movies where title =:name")
+    fun countMovies(name: String): Int
+
     @Query("SELECT * FROM movies")
     fun loadMovies(): LiveData<List<MoviesTable>>
 

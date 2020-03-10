@@ -20,6 +20,7 @@ import com.example.sample.apps.movies.viewmodels.LoadMoviesViewModel
  * A simple [Fragment] subclass.
  */
 
+
 private const val TAG = "FavouriteFragment";
 
 class FavouriteFragment : Fragment() {
@@ -32,10 +33,16 @@ class FavouriteFragment : Fragment() {
 
     private lateinit var adapter: MoviesListAdapter
 
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume: ")
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d(TAG, "onCreateView: ")
         val binding = FragmentUpcomingBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
 

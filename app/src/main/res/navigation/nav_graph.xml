@@ -12,10 +12,15 @@
         <action
             android:id="@+id/action_moviesPagerFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
         android:name="com.example.sample.apps.movies.MovieDetailFragment"
         android:label="fragment_movie_detail"
-        tools:layout="@layout/fragment_movie_detail" />
+        tools:layout="@layout/fragment_movie_detail" >
+    <argument
+        android:name="item"
+        app:argType="com.example.sample.apps.movies.model.data.ResultsItem" />
+    </fragment>
 </navigation>

@@ -12,6 +12,7 @@ private const val TAG = "LoadMoviesViewModel";
 
 class LoadMoviesViewModel internal constructor(val repository: UpcomingMovieRepository): ViewModel(){
 
+    private var movieLazyList:MutableList<ResultsItem?> = mutableListOf()
     private var movieList = MutableLiveData<List<ResultsItem?>>()
     private var showError = MutableLiveData<String>()
     private var totalPages: Int? = 1
@@ -29,8 +30,9 @@ class LoadMoviesViewModel internal constructor(val repository: UpcomingMovieRepo
         repository.loadUpcomingMovies(count,object: UpcomingMovieRepository.Listener{
             override fun loadUpcomingMoviesSuccess(response: ResponseUpcomingMovies) {
                 totalPages = response.totalPages
+                movieLazyList.addAll(response.results!!)
                 Log.d(TAG, "loadUpcomingMoviesSuccess: ${totalPages}")
-                movieList.value = response.results
+                movieList.value = movieLazyList
             }
 
             override fun loadUpcomingMoviesFailed(error: String) {

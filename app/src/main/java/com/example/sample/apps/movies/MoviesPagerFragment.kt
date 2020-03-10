@@ -1,6 +1,7 @@
 package com.example.sample.apps.movies
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 /**
  * A simple [Fragment] subclass.
  */
+
+private const val TAG = "MoviesPagerFragment";
 class MoviesPagerFragment : Fragment() {
 
     override fun onCreateView(
@@ -38,6 +41,11 @@ class MoviesPagerFragment : Fragment() {
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume: ")
     }
 
     private fun getTabIcon(position: Int): Int {

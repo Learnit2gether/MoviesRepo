@@ -32,11 +32,14 @@ class UpcomingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-         binding = FragmentUpcomingBinding.inflate(inflater, container, false)
+
+        Log.d(TAG, "onCreateView: ")
+        binding = FragmentUpcomingBinding.inflate(inflater, container, false)
 
         binding.lifecycleOwner = this
 
         adapter = MoviesListAdapter()
+        adapter.setUpcoming(true)
         binding.gridView.adapter = adapter
 
         subscribeUi(adapter)
@@ -69,7 +72,7 @@ class UpcomingFragment : Fragment() {
 
     private fun subscribeUi(adapter: MoviesListAdapter) {
         viewModel.movieListLiveData().observe(viewLifecycleOwner,
-            Observer<List<ResultsItem?>> { t -> adapter.setList(t!!,false) })
+            Observer<List<ResultsItem?>> { t -> adapter.setList(t!!,true) })
 
         viewModel.showErrorLiveData().observe(viewLifecycleOwner,
             Observer<String> { t -> errorDialog(activity as Context, t!!) })
