@@ -48,9 +48,9 @@ class MoviesPagerFragment : Fragment() {
             tab.text = getTabTitle(position)
         }.attach()
 
-        viewPager.currentItem = 0
-
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
+
+        viewPager.currentItem = 0
 
         return binding.root
     }
@@ -63,6 +63,18 @@ class MoviesPagerFragment : Fragment() {
         val searchItem: MenuItem? = menu?.findItem(R.id.action_search)
         val searchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchView: SearchView? = searchItem?.actionView as SearchView
+
+        searchItem.setOnMenuItemClickListener (object: MenuItem.OnMenuItemClickListener{
+            override fun onMenuItemClick(item: MenuItem?): Boolean {
+
+                viewPager.currentItem = 0
+                return true
+            }
+
+        })
+
+
+
 
         searchView?.setSearchableInfo(searchManager.getSearchableInfo(activity?.componentName))
 
