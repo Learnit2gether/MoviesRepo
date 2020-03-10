@@ -21,12 +21,14 @@ private const val TAG = "UpcomingFragment";
 
 class UpcomingFragment : Fragment() {
     private lateinit var binding: FragmentUpcomingBinding
-    private var totalPages: Int = 0
+    companion object {
+        lateinit var adapter: MoviesListAdapter
+    }
+
     private val viewModel: LoadMoviesViewModel by viewModels {
         InjectorUtils.provideUpcomingMovieVM(requireContext())
     }
 
-    private lateinit var adapter: MoviesListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +38,7 @@ class UpcomingFragment : Fragment() {
         Log.d(TAG, "onCreateView: ")
         binding = FragmentUpcomingBinding.inflate(inflater, container, false)
 
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         adapter = MoviesListAdapter()
         adapter.setUpcoming(true)

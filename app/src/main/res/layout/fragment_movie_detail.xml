@@ -9,110 +9,119 @@
             type="com.example.sample.apps.movies.model.data.ResultsItem" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint_layout"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/plant_detail_scrollview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <ImageView
-            android:id="@+id/imageview_hero"
-            android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:fitsSystemWindows="false"
-            android:scaleType="centerCrop"
-            android:src="@{resultItem.backdropPath}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageview_poster"
-            android:layout_width="0dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="0dp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageview_hero"
-            app:layout_constraintDimensionRatio="w,400:576"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
-            app:layout_constraintTop_toBottomOf="@+id/imageview_hero"
-            app:layout_constraintVertical_bias="0.52"
-            android:src="@{resultItem.posterPath}" />
+            <ImageView
+                android:id="@+id/imageview_hero"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:fitsSystemWindows="false"
+                android:scaleType="centerCrop"
+                android:src="@{resultItem.backdropPath}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_vertical_start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.041666668" />
+            <ImageView
+                android:id="@+id/imageview_poster"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:src="@{resultItem.posterPath}"
+                app:layout_constraintBottom_toBottomOf="@+id/imageview_hero"
+                app:layout_constraintDimensionRatio="w,400:576"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
+                app:layout_constraintTop_toBottomOf="@+id/imageview_hero"
+                app:layout_constraintVertical_bias="0.52" />
 
-        <TextView
-            android:id="@+id/textview_movie_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:text="@{resultItem.title}"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@android:color/white"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
-            app:layout_constraintStart_toEndOf="@+id/imageview_poster"
-            app:layout_constraintTop_toBottomOf="@+id/imageview_hero"/>
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_vertical_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.041666668" />
 
-        <TextView
-            android:id="@+id/textview_movie_details"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@{resultItem.releaseDate}"
-            app:layout_constraintStart_toEndOf="@+id/imageview_poster"
-            app:layout_constraintTop_toBottomOf="@+id/textview_movie_title"
-            android:textColor="@android:color/white"/>
+            <TextView
+                android:id="@+id/textview_movie_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="@{resultItem.title}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@android:color/white"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
+                app:layout_constraintStart_toEndOf="@+id/imageview_poster"
+                app:layout_constraintTop_toBottomOf="@+id/imageview_hero" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_vertical_end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.96" />
+            <TextView
+                android:id="@+id/textview_movie_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@{resultItem.releaseDate}"
+                android:textColor="@android:color/white"
+                app:layout_constraintStart_toEndOf="@+id/imageview_poster"
+                app:layout_constraintTop_toBottomOf="@+id/textview_movie_title" />
 
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/barrier_bottom_poster"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="bottom"
-            app:constraint_referenced_ids="textview_movie_details,imageview_poster"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_vertical_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.96" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_bottom_poster"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="textview_movie_details,imageview_poster"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
 
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/barrier_bottom_action_buttons"
-            android:layout_width="wrap_content"
-            android:layout_height="1dp"
-            app:barrierDirection="bottom"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_bottom_action_buttons"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                app:barrierDirection="bottom"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textview_description"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="11dp"
-            android:layout_marginEnd="16dp"
-            android:fontFamily="sans-serif"
-            android:paddingBottom="16dp"
-            android:textColor="@android:color/white"
-            android:text="@{resultItem.overview}"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
-            app:layout_constraintTop_toBottomOf="@+id/textview_movie_details" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textview_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="11dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="sans-serif"
+                android:paddingBottom="16dp"
+                android:text="@{resultItem.overview}"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_end"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
+                app:layout_constraintTop_toBottomOf="@+id/textview_movie_details" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

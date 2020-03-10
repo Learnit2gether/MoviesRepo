@@ -44,7 +44,7 @@ class FavouriteFragment : Fragment() {
     ): View? {
         Log.d(TAG, "onCreateView: ")
         val binding = FragmentUpcomingBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         adapter = MoviesListAdapter()
         binding.gridView.adapter = adapter

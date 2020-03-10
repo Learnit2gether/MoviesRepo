@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
@@ -17,17 +19,23 @@ import com.example.sample.apps.movies.model.repository.db.MoviesTable
 import java.util.*
 import kotlin.collections.ArrayList
 
+
 private const val TAG = "MoviesListAdapter";
 
-class MoviesListAdapter : BaseAdapter() {
+class MoviesListAdapter : BaseAdapter(), Filterable {
 
     private var list = ArrayList<ResultsItem?>()
+    private var backupList = ArrayList<ResultsItem?>()
+
+
     var isFromUpcoming = false
 
     fun setList(list: List<ResultsItem?>, clearOld: Boolean) {
         if (clearOld) {
             this.list.clear()
+            this.backupList.clear()
         }
+        this.backupList.addAll(list)
         this.list.addAll(list)
         notifyDataSetChanged()
     }
@@ -141,6 +149,41 @@ class MoviesListAdapter : BaseAdapter() {
                 }
             }
         }
+    }
+
+    override fun getFilter(): Filter {
+        var filter = object: Filter(){
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val result = FilterResults()
+                val allMovies: List<ResultsItem> = backupList as List<ResultsItem>
+
+                if (constraint == null || constraint?.length === 0) {
+                    result.values = allMovies
+                    result.count = allMovies.size
+                } else {
+                    val filteredList: ArrayList<ResultsItem> = ArrayList<ResultsItem>()
+                    for (movie in allMovies) {
+                        if (movie.title?.startsWith(constraint, true)!!) {
+                            filteredList.add(movie)
+                        }
+                    }
+                    result.values = filteredList
+                    result.count = filteredList?.size
+                }
+
+                return result
+            }
+
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                if (results!!.count === 0) {
+                    notifyDataSetInvalidated()
+                } else {
+                    list = results!!.values as ArrayList<ResultsItem?>
+                    notifyDataSetChanged()
+                }
+            }
+        }
+        return filter
     }
 }
 
