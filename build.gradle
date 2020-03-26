@@ -14,11 +14,17 @@ buildscript {
 
         // glide
         glideVersion = '4.9.0'
-        glidePaletteVersion = '2.1.2'
 
         //ktx
         ktxVersion = '1.0.2'
         fragmentVersion = '1.1.0-alpha09'
+
+        //material
+        materialVersion = '1.1.0-alpha09'
+
+        //room
+        roomVersion = '2.1.0'
+
 
 
     }
@@ -31,6 +37,8 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.6.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:1.0.0"
+
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
